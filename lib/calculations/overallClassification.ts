@@ -33,26 +33,3 @@ export function calculateOverallClassification(
     };
 }
 
-const testYears: Year[] = [
-  {
-    id: "y2",
-    yearNumber: 2,
-    countsTowardClassification: true,
-    modules: [
-      { id: "1", name: "Module A", grade: 72, credits: 20, isResit: false },
-      { id: "2", name: "Module B", grade: 65, credits: 20, isResit: false },
-    ],
-  },
-  {
-    id: "y3",
-    yearNumber: 3,
-    countsTowardClassification: true,
-    modules: [
-      { id: "3", name: "Module C", grade: 80, credits: 20, isResit: false },
-      { id: "4", name: "Module D", grade: 70, credits: 20, isResit: false },
-    ],
-  },
-];
-
-import { universities } from "@/data/universities";
-console.log(calculateOverallClassification(testYears, universities[0]));
