@@ -1,7 +1,7 @@
 export interface Module {
   id: string;
   name: string;
-  grade: number;
+  grade?: number;
   credits: number;
   isResit: boolean;
   cappedGrade?: number;
