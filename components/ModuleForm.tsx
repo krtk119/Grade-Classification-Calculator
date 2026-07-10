@@ -53,7 +53,13 @@ export default function ModuleForm() {
 >
   Add Module
 </button>
-
+<ul>
+  {modules.map((m) => (
+    <li key={m.id}>
+      {m.name} — {m.grade}% ({m.credits} credits)
+    </li>
+  ))}
+</ul>
       
     </div>
   );
