@@ -1,5 +1,6 @@
 "use client";
 
+import { calculateYearAverage } from "@/lib/calculations/yearAverage";
 import { Module } from "@/types";      
 import { useState } from "react";
 
@@ -9,7 +10,7 @@ export default function ModuleForm() {
   const [credits, setCredits] = useState("");
   const [modules, setModules] = useState<Module[]>([]);
   const handleAddModule = () => {
-    if (name && credits) {
+    if (name && credits && grade) {
       const newModule: Module = {
         id: crypto.randomUUID(),
         name: name,
@@ -23,6 +24,7 @@ export default function ModuleForm() {
       setCredits("");
     }
   };
+  const yearAverage = modules.length > 0 ? calculateYearAverage(modules) : 0;
   return (
     <div>
       
@@ -34,10 +36,10 @@ export default function ModuleForm() {
         className="border rounded px-3 py-2"
       />
       <input
-        type="text"
+        type="number"
         value={grade}
         onChange={(e) => setGrade(e.target.value)}
-        placeholder="Grade"
+        placeholder="Grade (%)"
         className="border rounded px-3 py-2"
       />
       <input
@@ -60,7 +62,9 @@ export default function ModuleForm() {
     </li>
   ))}
 </ul>
-      
+      <p className="mt-4 font-bold">
+        Year Average: {yearAverage.toFixed(2)}%
+      </p>
     </div>
   );
 }
