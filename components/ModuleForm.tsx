@@ -1,14 +1,19 @@
 "use client";
 
 import { calculateYearAverage } from "@/lib/calculations/yearAverage";
-import { Module } from "@/types";      
+import { Module } from "@/types";
 import { useState } from "react";
 
-export default function ModuleForm() {
+interface ModuleFormProps {
+  modules: Module[];
+  setModules: (modules: Module[]) => void;
+}
+
+export default function ModuleForm({ modules, setModules }: ModuleFormProps) {
   const [name, setName] = useState("");
   const [grade, setGrade] = useState("");
   const [credits, setCredits] = useState("");
-  const [modules, setModules] = useState<Module[]>([]);
+
   const handleAddModule = () => {
     if (name && credits && grade) {
       const newModule: Module = {
@@ -24,10 +29,11 @@ export default function ModuleForm() {
       setCredits("");
     }
   };
+
   const yearAverage = modules.length > 0 ? calculateYearAverage(modules) : 0;
+
   return (
     <div>
-      
       <input
         type="text"
         value={name}
@@ -50,18 +56,18 @@ export default function ModuleForm() {
         className="border rounded px-3 py-2"
       />
       <button
-  onClick={handleAddModule}
-  className="bg-blue-600 text-white px-4 py-2 rounded"
->
-  Add Module
-</button>
-<ul>
-  {modules.map((m) => (
-    <li key={m.id}>
-      {m.name} — {m.grade}% ({m.credits} credits)
-    </li>
-  ))}
-</ul>
+        onClick={handleAddModule}
+        className="bg-blue-600 text-white px-4 py-2 rounded"
+      >
+        Add Module
+      </button>
+      <ul>
+        {modules.map((m) => (
+          <li key={m.id}>
+            {m.name} — {m.grade}% ({m.credits} credits)
+          </li>
+        ))}
+      </ul>
       <p className="mt-4 font-bold">
         Year Average: {yearAverage.toFixed(2)}%
       </p>
