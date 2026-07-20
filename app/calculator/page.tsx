@@ -18,9 +18,6 @@ export default function CalculatorPage() {
         selectedScheme
     )
     : null;
-console.log("selectedScheme:", selectedScheme);
-console.log("modules:", modules);
-console.log("result:", result);
     return (
         <main className="flex min-h-screen flex-col items-center gap-4 p-4">
             <h1 className="text-4xl font-bold mb-4">University Grade Calculator</h1>
