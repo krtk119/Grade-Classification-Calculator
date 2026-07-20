@@ -7,9 +7,10 @@ import { useState } from "react";
 interface ModuleFormProps {
   modules: Module[];
   setModules: (modules: Module[]) => void;
+  yearLabel: string;
 }
 
-export default function ModuleForm({ modules, setModules }: ModuleFormProps) {
+export default function ModuleForm({ modules, setModules, yearLabel }: ModuleFormProps) {
   const [name, setName] = useState("");
   const [grade, setGrade] = useState("");
   const [credits, setCredits] = useState("");
@@ -34,6 +35,7 @@ export default function ModuleForm({ modules, setModules }: ModuleFormProps) {
 
   return (
     <div>
+      <h2 className="text-xl font-bold mb-2">{yearLabel}</h2>
       <input
         type="text"
         value={name}
