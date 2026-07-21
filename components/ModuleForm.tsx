@@ -14,13 +14,14 @@ export default function ModuleForm({ modules, setModules, yearLabel }: ModuleFor
   const [name, setName] = useState("");
   const [grade, setGrade] = useState("");
   const [credits, setCredits] = useState("");
+  const [notGraded, setNotGraded] = useState(false);
 
   const handleAddModule = () => {
-    if (name && credits && grade) {
+    if (name && credits && (grade || notGraded)) {
       const newModule: Module = {
         id: crypto.randomUUID(),
-        name: name,
-        grade: Number(grade),
+        name: name, 
+        grade: notGraded ? undefined : Number(grade),
         credits: Number(credits),
         isResit: false,
       };
@@ -28,6 +29,7 @@ export default function ModuleForm({ modules, setModules, yearLabel }: ModuleFor
       setName("");
       setGrade("");
       setCredits("");
+      setNotGraded(false); 
     }
   };
 
@@ -48,6 +50,7 @@ export default function ModuleForm({ modules, setModules, yearLabel }: ModuleFor
         value={grade}
         onChange={(e) => setGrade(e.target.value)}
         placeholder="Grade (%)"
+        disabled={notGraded}
         className="border rounded px-3 py-2"
       />
       <input
@@ -57,6 +60,14 @@ export default function ModuleForm({ modules, setModules, yearLabel }: ModuleFor
         placeholder="Credits"
         className="border rounded px-3 py-2"
       />
+      <label className="flex items-center space-x-2">
+        <input
+          type="checkbox"
+          checked={notGraded}
+          onChange={(e) => setNotGraded(e.target.checked)}
+        />
+        Not yet graded
+      </label>
       <button
         onClick={handleAddModule}
         className="bg-blue-600 text-white px-4 py-2 rounded"
@@ -66,7 +77,7 @@ export default function ModuleForm({ modules, setModules, yearLabel }: ModuleFor
       <ul>
         {modules.map((m) => (
           <li key={m.id}>
-            {m.name} — {m.grade}% ({m.credits} credits)
+            {m.name} — {m.grade !== undefined ? `${m.grade}%` : "Not yet graded"} ({m.credits} credits)
           </li>
         ))}
       </ul>
