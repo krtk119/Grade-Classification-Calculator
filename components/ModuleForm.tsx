@@ -7,6 +7,7 @@ import { useState } from "react";
 interface ModuleFormProps {
   modules: Module[];
   setModules: (modules: Module[]) => void;
+
   yearLabel: string;
 }
 
@@ -15,6 +16,9 @@ export default function ModuleForm({ modules, setModules, yearLabel }: ModuleFor
   const [grade, setGrade] = useState("");
   const [credits, setCredits] = useState("");
   const [notGraded, setNotGraded] = useState(false);
+  const handleDeleteModule = (id: string) => {
+    setModules(modules.filter((m) => m.id !== id));
+  };
 
   const handleAddModule = () => {
     if (name && credits && (grade || notGraded)) {
@@ -76,8 +80,17 @@ export default function ModuleForm({ modules, setModules, yearLabel }: ModuleFor
       </button>
       <ul>
         {modules.map((m) => (
-          <li key={m.id}>
-            {m.name} — {m.grade !== undefined ? `${m.grade}%` : "Not yet graded"} ({m.credits} credits)
+          <li key={m.id} className="flex items-center gap-2">
+          <span>
+            {m.name} - {m.grade !== undefined ? `${m.grade}%` : "Not yet graded"} ({m.credits} credits)
+          </span>
+          <button
+            onClick={() => handleDeleteModule(m.id)}
+            className="flex items-center justify-center w-5 h-5 rounded-full bg-white text-black text-xs font-bold hover:bg-gray-200"
+            aria-label="Delete module"
+            >
+              x
+            </button>
           </li>
         ))}
       </ul>
