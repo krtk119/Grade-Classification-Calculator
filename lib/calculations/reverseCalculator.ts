@@ -25,13 +25,16 @@ export function calculateRequiredAverage(
   // Piece 2: how many percentage points are already "locked in"
   // from modules that have actually been graded so far, weighted by year
   const bankedPoints = years.reduce((sum, year) => {
-    const gradedModules = year.modules.filter((m) => m.grade !== undefined);
-    if (gradedModules.length === 0) return sum; // nothing graded yet this year, skip
+  const totalYearCredits = year.modules.reduce((s, m) => s + m.credits, 0);
+  if (totalYearCredits === 0) return sum;
 
-    const gradedAverage = calculateYearAverage(gradedModules);
-    const weight = scheme.yearWeights[year.yearNumber] ?? 0;
-    return sum + (gradedAverage * weight) / 100; // /100 corrects for multiplying two percentages
-  }, 0);
+  const gradedPoints = year.modules
+    .filter((m) => m.grade !== undefined)
+    .reduce((s, m) => s + m.grade! * m.credits, 0);
+
+  const weight = scheme.yearWeights[year.yearNumber] ?? 0;
+  return sum + (gradedPoints / totalYearCredits) * weight / 100;
+}, 0);
 
   // Piece 3: how much of the final degree weight is still undetermined —
   // i.e. how much is riding on modules that haven't been graded yet
