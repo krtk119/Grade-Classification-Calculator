@@ -52,7 +52,7 @@ export default function ModuleForm({ modules, setModules, yearLabel }: ModuleFor
   const yearAverage = modules.length > 0 ? calculateYearAverage(modules) : 0;
 
   return (
-    <div className="w-full max-w-sm">
+    <div className="w-full max-w-sm mx-auto">
       <h2 className="text-xl font-bold mb-2 text-[#F5F3EE]">{yearLabel}</h2>
       <div className="flex flex-col sm:flex-row flex-wrap gap-2">
         <input
