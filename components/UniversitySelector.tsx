@@ -20,7 +20,7 @@ export default function UniversitySelector({
                 onSelectScheme(scheme);
             }
         }}
-        className="border rounded px-3 py-2"
+        className="border rounded px-2 py-1 bg-[#0F0E2E] text-[#F5F3EE]"
         >
         <option value="" disabled>
           Select a university scheme

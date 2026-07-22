@@ -41,7 +41,7 @@ export default function ModuleForm({ modules, setModules, yearLabel }: ModuleFor
 
   return (
     <div>
-      <h2 className="text-xl font-bold mb-2">{yearLabel}</h2>
+      <h2 className="text-xl font-bold mb-2 text-[#F5F3EE]">{yearLabel}</h2>
       <input
         type="text"
         value={name}
@@ -62,9 +62,9 @@ export default function ModuleForm({ modules, setModules, yearLabel }: ModuleFor
         value={credits}
         onChange={(e) => setCredits(e.target.value)}
         placeholder="Credits"
-        className="border rounded px-3 py-2"
+        className="border border-[#F5F3EE]/30 bg-transparent text-[#F5F3EE] rounded px-3 py-2 placeholder:text-[#F5F3EE]/40"
       />
-      <label className="flex items-center space-x-2">
+      <label className="flex items-center space-x-2 text-[#F5F3EE]">
         <input
           type="checkbox"
           checked={notGraded}
@@ -81,7 +81,7 @@ export default function ModuleForm({ modules, setModules, yearLabel }: ModuleFor
       <ul>
         {modules.map((m) => (
           <li key={m.id} className="flex items-center gap-2">
-          <span>
+          <span className="text-[#F5F3EE]">
             {m.name} - {m.grade !== undefined ? `${m.grade}%` : "Not yet graded"} ({m.credits} credits)
           </span>
           <button
@@ -94,7 +94,7 @@ export default function ModuleForm({ modules, setModules, yearLabel }: ModuleFor
           </li>
         ))}
       </ul>
-      <p className="mt-4 font-bold">
+      <p className="mt-4 font-bold text-[#F5F3EE]">
         Year Average: {yearAverage.toFixed(2)}%
       </p>
     </div>

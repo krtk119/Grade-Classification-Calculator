@@ -7,6 +7,7 @@ import UniversitySelector from "@/components/UniversitySelector";
 import ModuleForm from "@/components/ModuleForm";
 import { calculateOverallClassification } from "@/lib/calculations/overallClassification";
 import { calculateRequiredAverage} from "@/lib/calculations/reverseCalculator";
+import CalculatorShell from "@/components/CalculatorShell";
 
 export default function CalculatorPage() {
     const [selectedScheme, setSelectedScheme] = useState<UniversityScheme | null>(null);
@@ -27,9 +28,10 @@ export default function CalculatorPage() {
     selectedScheme && (year2Modules.length > 0 || year3Modules.length > 0) 
          ? calculateRequiredAverage(years, selectedScheme, target)
          : null;
-    return (
-        <main className="flex min-h-screen flex-col items-center gap-4 p-4">
-            <h1 className="text-4xl font-bold mb-4">University Grade Calculator</h1>
+
+
+         return (
+        <CalculatorShell title="University Grade Calculator">
             <UniversitySelector
                 schemes={schemes}
                 selectedScheme={selectedScheme}
@@ -48,35 +50,35 @@ export default function CalculatorPage() {
                 />
             </div>
             {result && (
-                <p className="text-xl font-bold">
+                <p className="text-xl font-bold text-[#F5F3EE]">
                     Overall: {result.percentage.toFixed(2)}% - {result.classification}
                 </p>
             )}
             <div className="flex flex-col items-center gap-2 mt-4">
-  <label>
-    Target classification:{" "}
-    <select
-      value={target}
-      onChange={(e) => setTarget(e.target.value)}
-      className="border rounded px-2 py-1"
-    >
-      <option value="First">First</option>
-      <option value="2:1">2:1</option>
-      <option value="2:2">2:2</option>
-      <option value="Third">Third</option>
-    </select>
-  </label>
- {reverseResult && (
-    <p className="text-lg">
-      {!reverseResult.isAchievable
-        ? `A ${target} is no longer achievable with your remaining modules.`
-        : reverseResult.requiredAverage <= 0
-        ? `You've already secured at least a ${target}, regardless of your remaining modules.`
-        : `You need ${reverseResult.requiredAverage.toFixed(2)}% average in your remaining modules for a ${target}.`}
-    </p>
-  )}
-</div>
-        </main>
+                <label className="text-[#F5F3EE]">
+                    Target classification:{" "}
+                    <select
+                        value={target}
+                        onChange={(e) => setTarget(e.target.value)}
+                        className="border rounded px-2 py-1 bg-[#0F0E2E] text-[#F5F3EE]"
+                    >
+                        <option value="First">First</option>
+                        <option value="2:1">2:1</option>
+                        <option value="2:2">2:2</option>
+                        <option value="Third">Third</option>
+                    </select>
+                </label>
+                {reverseResult && (
+                    <p className="text-lg text-[#F5F3EE]">
+                        {!reverseResult.isAchievable
+                            ? `A ${target} is no longer achievable with your remaining modules.`
+                            : reverseResult.requiredAverage <= 0
+                            ? `You've already secured at least a ${target}, regardless of your remaining modules.`
+                            : `You need ${reverseResult.requiredAverage.toFixed(2)}% average in your remaining modules for a ${target}.`}
+                    </p>
+                )}
+            </div>
+        </CalculatorShell>
     );
 }
   

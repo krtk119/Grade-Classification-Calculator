@@ -42,11 +42,11 @@ export default function Home() {
         </h1>
         <p className="text-[#F5F3EE]/70">
           Work out your UK degree classification, and what you still need to
-          score to hit your target — whether you&apos;re checking your full
+          score to hit your target, whether you&apos;re checking your full
           degree across multiple years, or just one year at a time.
         </p>
         <p className="text-sm text-[#F5F3EE]/50">
-          Supports common UK weighting patterns (e.g. 20:80, 30:70, 33:67) —
+          Supports common UK weighting patterns (e.g. 20:80, 30:70, 33:67), but always
           check your own university&apos;s regulations for exact figures.
         </p>
         <div className="flex gap-4 mt-2">
@@ -56,12 +56,12 @@ export default function Home() {
           >
             Full Degree Calculator
           </Link>
-          <Link
-            href="/single-year-calculator"
-            className="border border-[#F5F3EE]/30 text-[#F5F3EE] px-5 py-2.5 rounded-lg hover:bg-[#F5F3EE]/10 transition"
-          >
-            Check a Single Year
-          </Link>
+         <Link
+  href="/single-year-calculator"
+  className="bg-[#F0B429] text-[#0F0E2E] font-semibold px-5 py-2.5 rounded-lg hover:bg-[#F0B429]/90 transition"
+>
+  Check a Single Year
+</Link>
         </div>
       </div>
     </main>
