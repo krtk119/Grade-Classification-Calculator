@@ -37,18 +37,23 @@ export default function CalculatorPage() {
                 selectedScheme={selectedScheme}
                 onSelectScheme={setSelectedScheme}
             />
-            <div className="flex gap-8">
-                <ModuleForm
-                    modules={year2Modules}
-                    setModules={setYear2Modules}
-                    yearLabel="Year 2 Modules"
-                />
-                <ModuleForm
-                    modules={year3Modules}
-                    setModules={setYear3Modules}
-                    yearLabel="Year 3 Modules"
-                />
-            </div>
+            
+            <div className="flex flex-col md:flex-row gap-8 w-full max-w-4xl px-2">
+  <div className="flex-1">
+    <ModuleForm
+      modules={year2Modules}
+      setModules={setYear2Modules}
+      yearLabel="Year 2 Modules"
+    />
+  </div>
+  <div className="flex-1">
+    <ModuleForm
+      modules={year3Modules}
+      setModules={setYear3Modules}
+      yearLabel="Year 3 Modules"
+    />
+  </div>
+</div>
             {result && (
                 <p className="text-xl font-bold text-[#F5F3EE]">
                     Overall: {result.percentage.toFixed(2)}% - {result.classification}
