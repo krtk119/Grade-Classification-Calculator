@@ -21,22 +21,33 @@ export default function ModuleForm({ modules, setModules, yearLabel }: ModuleFor
   };
 
   const handleAddModule = () => {
-    if (name && credits && (grade || notGraded)) {
-      const newModule: Module = {
-        id: crypto.randomUUID(),
-        name: name, 
-        grade: notGraded ? undefined : Number(grade),
-        credits: Number(credits),
-        isResit: false,
-      };
-      setModules([...modules, newModule]);
-      setName("");
-      setGrade("");
-      setCredits("");
-      setNotGraded(false); 
-    }
-  };
+  if (name && credits && (grade || notGraded)) {
+    const gradeNum = notGraded ? undefined : Number(grade);
+    const creditsNum = Number(credits);
 
+    if (gradeNum !== undefined && (gradeNum < 0 || gradeNum > 100)) {
+      alert("Grade must be between 0 and 100.");
+      return;
+    }
+    if (creditsNum <= 0) {
+      alert("Credits must be greater than 0.");
+      return;
+    }
+
+    const newModule: Module = {
+      id: crypto.randomUUID(),
+      name: name,
+      grade: gradeNum,
+      credits: creditsNum,
+      isResit: false,
+    };
+    setModules([...modules, newModule]);
+    setName("");
+    setGrade("");
+    setCredits("");
+    setNotGraded(false);
+  }
+};
   const yearAverage = modules.length > 0 ? calculateYearAverage(modules) : 0;
 
   return (
